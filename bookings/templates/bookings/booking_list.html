@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking List</title>
+</head>
+<body>
+    <h1>All Bookings</h1>
+    <a href="{% url 'booking_create' %}">Create a New Booking</a>
+
+    <ul>
+        {% for booking in bookings %}
+            <li>{{ booking.guest_name }} - {{ booking.room.name }} ({{ booking.check_in }} to {{ booking.check_out }})</li>
+        {% empty %}
+            <li>No bookings yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

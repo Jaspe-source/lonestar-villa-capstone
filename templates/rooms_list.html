@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Available Rooms</h2>
+<ul>
+  {% for room in rooms %}
+  <li>
+    <h3><a href="{% url 'room_detail' room.pk %}">{{ room.name }}</a></h3>
+    <p>Type: {{ room.get_room_type_display }} — Ksh {{ room.price_per_night }}</p>
+    {% if room.image %}
+      <img src="{{ room.image.url }}" alt="{{ room.name }}" style="max-width:200px;margin:6px 0;">
+    {% endif %}
+    <p>{{ room.description|linebreaksbr }}</p>
+  </li>
+  {% empty %}
+  <li>No rooms available</li>
+  {% endfor %}
+</ul>
+{% endblock %}

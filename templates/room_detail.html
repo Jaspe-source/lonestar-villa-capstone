@@ -1,19 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>{{ room.name }}</h2>
-<p>Type: {{ room.get_room_type_display }}</p>
-<p>Price (per night): Ksh {{ room.price_per_night }}</p>
-{% if room.image %}
-  <img src="{{ room.image.url }}" alt="{{ room.name }}" style="max-width:300px;">
-{% endif %}
-<p>{{ room.description|linebreaksbr }}</p>
+<p>{{ room.description }}</p>
 
-<h3>Book this room</h3>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Request Booking</button>
+  <button type="submit">Book Now</button>
 </form>
-
-<p><a href="{% url 'rooms_list' %}">Back to Rooms</a></p>
 {% endblock %}

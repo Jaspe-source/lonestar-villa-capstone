@@ -6,6 +6,8 @@ from rest_framework.response import Response
 
 from django.shortcuts import render, get_object_or_404, redirect
 from bookings.forms import BookingForm
+def test_error(request):
+    raise Exception("Test error: Django debug mode check")
 
 
 class RoomViewSet(viewsets.ModelViewSet):

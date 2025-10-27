@@ -1,1 +1,2 @@
-web: gunicorn lonestar.wsgi:application
+web: python manage.py migrate && gunicorn lonestar.wsgi:application
+

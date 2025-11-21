@@ -1,20 +1,101 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+<style>
+  body {
+    background-color: #f5f7fa;
+    font-family: "Poppins", sans-serif;
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .rooms-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .room-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .room-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .room-info {
+    padding: 20px;
+  }
+
+  .room-info h3 {
+    margin: 0;
+    color: #007b5e;
+    font-size: 1.4rem;
+  }
+
+  .room-info p {
+    color: #555;
+    font-size: 0.95rem;
+    margin: 8px 0;
+  }
+
+  .price {
+    font-weight: bold;
+    color: #222;
+  }
+
+  .details-btn {
+    display: inline-block;
+    background: #007b5e;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .details-btn:hover {
+    background: #005f47;
+  }
+</style>
+
 <h2>Available Rooms</h2>
 
-<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+<div class="rooms-container">
   {% for room in rooms %}
-  <div style="border: 1px solid #ddd; padding: 10px; border-radius: 10px; width: 300px; background-color: #fafafa;">
+  <div class="room-card">
     {% if room.image %}
-      <img src="{{ room.image.url }}" alt="{{ room.name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+      <img src="{{ room.image.url }}" alt="{{ room.name }}">
     {% else %}
-      <p>No image available</p>
+      <img src="{% static 'images/default-room.jpg' %}" alt="Default room">
     {% endif %}
-    <h3>{{ room.name }}</h3>
-    <p>{{ room.description }}</p>
-    <p><strong>Price per night:</strong> Ksh {{ room.price_per_night }}</p>
-    <a href="{% url 'room_detail' room.pk %}">View Details</a>
+    <div class="room-info">
+      <h3>{{ room.name }}</h3>
+      <p>{{ room.description|truncatechars:100 }}</p>
+      <p class="price">Price per night: Ksh {{ room.price_per_night }}</p>
+      <a href="{% url 'room_detail' room.pk %}" class="details-btn">View Details</a>
+    </div>
   </div>
   {% endfor %}
 </div>

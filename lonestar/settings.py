@@ -46,9 +46,11 @@ INSTALLED_APPS = [
     'bookings',
     'cloudinary',
     'cloudinary_storage',
-    
-
 ]
+
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

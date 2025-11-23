@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rooms',
     'bookings',
+    'cloudinary',
+    'cloudinary_storage',
+    
+
 ]
 
 MIDDLEWARE = [
@@ -168,9 +172,8 @@ REST_FRAMEWORK = {
     ]
 }
 
-# Cloudinary setup
-INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
 
-CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
